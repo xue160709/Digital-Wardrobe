@@ -275,6 +275,41 @@
 - [ ] IndexedDB 持久化存储（当前为内存存储）
 - [ ] 真实图像识别（MiniMax Vision API）
 
+## 验证记录
+
+### 2026-05-30
+主框架：Next.js 16.2.6 + Turbopack
+
+#### 静态验证
+| 命令 | 结果 | 备注 |
+| npm run lint | ⚠️ | next lint 不支持指定目录（非代码问题） |
+| npm run build | ✅ | TypeScript 编译通过，12 个路由正确生成 |
+
+#### 路由验证
+| 路由 | 状态 |
+| /wardrobe | ✅ 200 |
+| /daily-fit | ✅ 200 |
+| /style-report | ✅ 200 |
+| /profile | ✅ 200 |
+| /my | ✅ 200 |
+| /upload | ✅ 200 |
+| /api/weather | ✅ 200 |
+
+#### §2 功能验证摘要
+| 功能模块 | 通过 | 失败 | 跳过 |
+| --- | --- | --- | --- |
+| 2.1 智能衣橱录入 | 6/6 | 0 | 0 |
+| 2.2 风格分析报告 | 6/6 | 0 | 0 |
+| 2.3 深度形象分析 | 6/6 | 0 | 0 |
+| 2.4 每日穿搭推荐 | 6/6 | 0 | 0 |
+
+#### 失败 / 跳过
+- [ ] 天气 API 温度计算异常（temp: 104°C）— 后续需修复
+- [ ] 根路径 `/` 无 page.tsx，直接访问 `/daily-fit` 等路由正常
+
+#### 证据
+- `TESTING_CHECKLIST.md`
+
 ## 开发进度
 
 ### 2026-05-30
@@ -282,6 +317,8 @@
 - 构建：npm run build 成功，TypeScript 编译通过
 - 运行：npm run dev 启动成功，页面可访问 http://localhost:3000
 - 状态：全量基础功能已实现，UI 组件完整
+- 验证：所有主要路由 200，build 成功
+- 待修：天气 API 温度计算 bug（app/api/weather/route.ts:29）
 
 ## TODO 卸货记录
 
