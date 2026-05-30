@@ -26,7 +26,10 @@ export async function GET(req: NextRequest) {
       const current = data.current_condition?.[0]
 
       if (current) {
-        const temp = Math.round((parseInt(current.temp_C, 10) + parseInt(current.temp_F, 10) * 9 / 5) / 2)
+        // 正确：先统一转换为摄氏温度，再求平均
+        // 华氏转摄氏：(temp_F - 32) * 5/9
+        const tempFtoC = (parseInt(current.temp_F, 10) - 32) * 5 / 9
+        const temp = Math.round((parseInt(current.temp_C, 10) + tempFtoC) / 2)
         const condition = getConditionFromCode(current.weatherCode)
 
         console.log(tag, 'success', { city, temp, condition, ms: Date.now() - t0 })

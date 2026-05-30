@@ -40,3 +40,9 @@ next-env.d.ts
 .vscode/
 *.swp
 *.swo
+# Test results
+test-results/
+.playwright-cli/
+
+# Environment
+.env.local
